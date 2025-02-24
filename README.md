@@ -1,0 +1,1 @@
+![Snake Game Screenshot](./images/ss.jpg)
