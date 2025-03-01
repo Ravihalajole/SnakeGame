@@ -1,8 +1,19 @@
+:root{
+    --col1:#f6c445;
+    --col2:#72fa93;
+    --col3:#9ac1f0;
+    --col4:#a0e548;
+    --col5:#e45f2b;
+    --colbg:#222;
+}
 * {
     padding: 0;
     margin: 0;
     box-sizing: border-box;
     font-family:Verdana, Geneva, Tahoma, sans-serif;
+    user-select: none;
+    cursor: pointer;
+    text-decoration: none;
 }
 
 .flex{
@@ -15,6 +26,9 @@
 .flex-column{
     flex-direction: column;
 }
+.flex-wrap{
+    flex-wrap: wrap;
+}
 .pos-fixed{
     position: fixed;
 }
@@ -26,49 +40,131 @@
     width: 100vw;
 }
 #gameOver{
-    background-color: #ac9125ee;
-    display: none;
+    background-color: var(--colbg);
+    color:var(--col2);
     height: 100vh;
+    top: 0;
+    left: 0;
+    z-index: 1;
+    gap: 5vmin;
 }
 .gameOvermsg{
     font-size: 20vmin;
 }
-.restartbtn{
-    background-color: rgb(0, 40, 7);
-    color: rgb(210, 210, 210);
+#restartbtn{
+    background-color:var(--col5);
+    color:var(--colbg);
     padding: 5px 10px;
     border-radius: 5px;
 }
-#score{
+#homebtn{
+    border: 1px solid var(--col1);
+    padding: 4px;
+    border-radius: 4px;
+}
+#start-game{
+    background-color: var(--col4);
+    color: var(--colbg);
+    border-radius: 4px;
+    padding: 24px;
+    font-size: large;
+}
+#start-page{
+    background-color: var(--colbg);
+    color: var(--col2);
+    gap: 10vmin;
+    height: 100vh;
+    width: 100vw;
+}
+
+#scoreBox{
     font-size: 10vmin;
     position: fixed;
     top:0;
     right: 10px;
-    color: rgb(255, 255, 255);
+    color: var(--col3);
+    z-index: 2;
 }
 #pause{
-    background-color: rgb(47, 207, 108);
-    color: rgb(56, 56, 56);
+    color: var(--col2);
     width: max-content;
     position: fixed;
     top: 1vmin;
     left: 1vmin;
     padding: 2vmin;
+    border: 2px solid var(--col1) ;
     border-radius: 1vmin;
 }
 
 #bg-main{
-    background-color: #376F48;
+    background-color: var(--colbg);
 }
 canvas{
-    border: 1px solid #2b2201ee;
+    border: 2px solid var(--col2);
+    background-color:var(--colbg);
 }
-#speedControl{
-    background-color: brown;
-    color: aliceblue;
-    padding: 2vmin;
-    width: max-content;
+
+.ctrlbtns{
+    height: 20vmin;
+    width: 20vmin;
+    line-height: 5;
+    text-align: center;
+    border: var(--col1) 2px solid;
+    border-radius: 1vmin;
+    color: var(--col2);
+}
+.controlPadContainer{
+    bottom: 5vmin;
+    width: 100vw;
+    z-index: 0;
+}
+.invisible{
+    opacity: 0;
+}
+#touchCtrls{
     position: fixed;
-    top: 10vmin;
-    left: 0;
+    bottom: 2vmin;
+    left: 2vmin;
+    border: 2px solid var(--col1);
+    border-radius: 1vmin;
+    color: var(--col2);
+    padding: 1vmin;
+}
+.hide{
+    display: none;
+}
+.diff-radio{
+    height: 0;
+    width: 0;
+    position: absolute;
+    opacity: 0;
+}
+.diff-radio:checked + label{
+    background-color: var(--col5);
+    color: var(--colbg);
+    border-radius: 4px;
+    padding: 4px;
+}
+.gap-5{
+    gap:5vmin;
+}
+#gameDiffBoard{
+    border: 1px solid var(--col4);
+    padding: 16px;
+    border-radius: 4px;
+}
+.move-diffboard{
+    position: fixed;
+    top: 20vmin;
+    left: 5px;
+}
+.logo{
+    height: 10vmin;
+    width: 10vmin;
+}
+#devname a{
+    color: var(--col1);
+}
+#devname a:visited{
+    color: var(--col1);
 }

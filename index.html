@@ -5,21 +5,57 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Snake Game</title>
+    <link rel="icon" href="images/snakeface.png">
     <link rel="stylesheet" href="css/style.css">
 </head>
 
-<body>
-<div class="pos-fixed w-100"  id="bg-main">
-    <div class="flex flex-center">
+<body id="bg-main">
+    <div class="flex flex-center flex-column" id="start-page">
+        <div class="flex gap-5">
+        <img src="images/snakeface.png" alt="Snake Face Logo" class="logo">
+        <h1 id="gameTitle">Snake Game</h1></div>
+        <div class="flex gap-5 flex-wrap" id="gameDiffBoard">
+            <div>
+                <input type="radio" value="150" id="easy" name="difficulty" class="diff-radio">
+                <label for="easy">Easy</label>
+            </div>
+            <div>
+                <input type="radio" value="100" id="medium" name="difficulty" class="diff-radio" checked>
+                <label for="medium">Medium</label>
+            </div>
+            <div>
+                <input type="radio" value="50" id="hard" name="difficulty" class="diff-radio">
+                <label for="hard">Hard</label>
+            </div>
+        </div>
+        
+        <div id="start-game">Start</div>
+        <div id="devname">Developed By <a href="https://ravihalajole.github.io/" target="_blank">Ravi</a>
+        </div>
+    </div>
+    <div class="flex flex-center hide" id="canvas-container">
         <canvas></canvas>
     </div>
-</div>
-<div class="pos-fixed w-100 flex flex-center flex-column" id="gameOver">
-    <div class="gameOvermsg">Game Over</div>
-    <div class="restartbtn">Restart</div>
-</div>
-<div id="score">score: 0</div>
-<div id="pause">Pause</div>
+    <div class="pos-fixed w-100 flex flex-center flex-column hide" id="gameOver">
+        <div class="gameOvermsg">Game Over</div>
+        <div class="flex gap-5">
+        <div id="restartbtn">Restart</div>
+        <div id="homebtn">Home</div></div>
+    </div>
+    <div id="scoreBox" class="hide"></div>
+    <div id="pause" class="hide">Pause</div>
+    <div id="touchCtrls">Touch Controls</div>
+    <div class="pos-fixed controlPadContainer">
+        <div id="controlPad" class="flex flex-center flex-column hide">
+            <div class="ctrlbtns" id="upbtn">Up</div>
+            <div class="flex flex-center">
+                <div class="ctrlbtns" id="leftbtn">Left</div>
+                <div class="ctrlbtns invisible"></div>
+                <div class="ctrlbtns" id="rightbtn">Right</div>
+            </div>
+            <div class="ctrlbtns" id="downbtn">Down</div>
+        </div>
+    </div>
     <script src="js/component.js"></script>
     <script src="js/app.js"></script>
     <script src="js/controller.js"></script>

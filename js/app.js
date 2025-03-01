@@ -1,37 +1,39 @@
 class Gameboard{
     constructor(){
         this.context=document.querySelector('canvas').getContext('2d')
-        this.height=Math.min(window.innerHeight,window.innerWidth)
+        this.height=Math.min(window.innerHeight-5,window.innerWidth-5)
         document.querySelector('canvas').width = this.height;
         document.querySelector('canvas').height = this.height;
         this.blockSize=(this.height)/20
         this.snake=[]
         this.createSnake(this.height/2-this.blockSize/2,this.height/2-this.blockSize/2,'images/snakeface.png')
         this.createNewFruit()
-        this.background=new Component(0,0,this.height,this.height,'images/bg23.jpg',this.context,'image')
     }
     clear(){
         this.context.clearRect(0,0,this.height,this.height)
     }
     createNewFruit(){
-        this.fruit=new Component(Math.random()*(this.height-(this.blockSize*2)),Math.random()*(this.height-(this.blockSize*2)),this.blockSize*1.5,this.blockSize*1.5,'images/fruit7.png',this.context,'image')
+        this.fruit=new Component(Math.random()*(this.height-(this.blockSize*1.5)),Math.random()*(this.height-(this.blockSize*1.5)),this.blockSize*1.5,this.blockSize*1.5,'images/fruit1.png',this.context,'image')
     }
     createSnake(x,y,image='images/snakebody.png'){
         this.snake.push(new Component(x,y,this.blockSize,this.blockSize,image,this.context,'image'))
     }
 }
 
-let Game;
-let refreshInterval;
+let Game
+let refreshInterval
 let disableControls=false
 let gameOver=document.querySelector('#gameOver')
-let shrinkFruit;
+let startPage=document.querySelector('#start-page')
+let canvasContainer=document.querySelector('#canvas-container')
+let shrinkFruit
 let tempSpeedX
 let tempSpeedY
 let isPaused=false
+let refreshRate=100
 let gameOverAudio=new Audio('audio/game-over.mp3')
 let gameBonusAudio=new Audio('audio/game-bonus1.mp3')
-window.addEventListener('DOMContentLoaded',startGame)
+
 
 function startGame(){
     Game=new Gameboard()
@@ -40,19 +42,18 @@ function startGame(){
     refreshInterval=setInterval(()=>{
         if(!isPaused){
         updateGame()}
-    },100)
+    },refreshRate)
 }
 
 function updateGame(){
     Game.clear()
-    Game.background.draw()
+    checkEatFruit()
+    Game.fruit.draw()
+    updateSnakeParts()
     Game.snake.forEach((block)=>{
         block.draw()
     })
-    checkEatFruit()
-    Game.fruit.draw()
     checkGameOver()
-    updateSnakeParts()
 }
 
 function checkGameOver(){
@@ -61,8 +62,7 @@ function checkGameOver(){
         disableControls=true
         clearInterval(refreshInterval)
         gameOverAudio.play()
-        gameOver.style.display='flex'
-        pausebtn.style.display='none'
+        gameOver.classList.remove('hide')
     }
 }
 
@@ -79,26 +79,29 @@ function checkEatFruit(){
 
 function restartGame(){
     startGame()
-    gameOver.style.display='none'
+    gameOver.classList.add('hide')
     disableControls=false
     scoreCount=0
+    updateScore()
     snakeLength=0
     firstMove=true
     gameOverbool=false
-    pausebtn.style.display='block'
+}
+function initializeGame(){
+    canvasContainer.classList.remove('hide')
+    pausebtn.classList.remove('hide')
+    scoreBox.classList.remove('hide')
+    gameDiffBoard.classList.remove('hide')
+    startPage.classList.add('hide')
+    restartGame()
+}
+function goToHome(){
+    startPage.classList.remove('hide')
+    canvasContainer.classList.add('hide')
+    pausebtn.classList.add('hide')
+    gameOver.classList.add('hide')
+    scoreBox.classList.add('hide')
+    startPage.classList.remove('hide')
 }
 
-function pauseGame(){
-    if(!isPaused){
-    disableControls=true
-    tempSpeedX=Game.snake[0].speedX
-    tempSpeedY=Game.snake[0].speedY
-    stopMove()
-    isPaused=true}
-    else if(isPaused){
-        disableControls=false
-    Game.snake[0].speedX=tempSpeedX
-    Game.snake[0].speedY=tempSpeedY
-    isPaused=false
-    }
-}
+

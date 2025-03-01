@@ -1,10 +1,10 @@
-let score = document.querySelector('#score')
+let scoreBox = document.querySelector('#scoreBox')
 let scoreCount = 0;
 let snakeLength = 0;
 let i
 let gameOverbool = false
 function updateScore() {
-    score.innerText = `score: ${scoreCount}`
+    scoreBox.textContent = `score: ${scoreCount}`
 }
 
 function growSnake() {
@@ -20,7 +20,6 @@ function updateSnakeParts() {
 }
 
 function isSnakeBite() {
-   
         for (i = Game.snake.length - 1; i > 0; i--) {
             if ((Game.snake[0].x == Game.snake[i].x) && (Game.snake[0].y == Game.snake[i].y)) {
                 gameOverbool = true

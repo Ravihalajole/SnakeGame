@@ -18,9 +18,6 @@ class Component {
         this.edges()
         this.updatePosition()
         if (this.type == 'image') {
-            this.ctx.shadowColor='#0000005e'
-            this.ctx.shadowOffsetX=1
-            this.ctx.shadowOffsetY=1
             this.ctx.drawImage(this.image, this.x, this.y, this.width, this.height)
         } else {
             this.ctx.fillStyle = this.color
